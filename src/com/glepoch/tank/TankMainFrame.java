@@ -17,7 +17,7 @@ import java.awt.event.WindowEvent;
  */
 public class TankMainFrame extends Frame {
     Tank tank = new Tank(100, 100, Dir.DOWN);
-
+    Bullet bullet=new Bullet(150,100,Dir.DOWN);
 
     public TankMainFrame() {
         setSize(600, 400);
@@ -36,6 +36,7 @@ public class TankMainFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         tank.paint(g);
+        bullet.paint(g);
     }
 
     class MyKeyListener extends KeyAdapter {

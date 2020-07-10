@@ -2,25 +2,10 @@ package com.glepoch.tank;
 
 import java.awt.*;
 
-public class Tank {
+public class Bullet {
     private static final int SPEED = 5;
-    private boolean moving = false;
     int x = 10, y = 10;
     Dir dir = Dir.DOWN;
-
-    public boolean isMoving() {
-        return moving;
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
-
-    public Tank(int x, int y, Dir dir) {
-        this.x = x;
-        this.y = y;
-        this.dir = dir;
-    }
 
     public int getX() {
         return x;
@@ -46,14 +31,18 @@ public class Tank {
         this.dir = dir;
     }
 
+    public Bullet(int x, int y, Dir dir) {
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
+    }
+
     public void paint(Graphics g) {
-        g.fillRect(x, y, 20, 20);
+        g.fillOval(x, y, 10, 10);
         move();
     }
 
     private void move() {
-        if (!moving)
-            return;
         switch (dir) {
             case LEFT:
                 x -= SPEED;
