@@ -12,18 +12,14 @@ import java.awt.event.WindowEvent;
  */
 public class TankMain {
     public static void main(String[] args) {
-        Frame frame=new Frame();
-        frame.setSize(800,600);
-        frame.setResizable(false);
-        frame.setTitle("Tank");
-        frame.setAlwaysOnTop(true);
-        frame.setLocation(50,50);
-        frame.setVisible(true);
-        frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
+        TankMainFrame tank=new TankMainFrame();
+        while (true){
+            try {
+                Thread.sleep(50);
+                tank.repaint();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
+        }
     }
 }
