@@ -16,7 +16,8 @@ import java.awt.event.WindowEvent;
  * @version: 1.0
  */
 public class TankMainFrame extends Frame {
-    int x = 10, y = 10;
+    Tank tank = new Tank(100, 100, Dir.DOWN);
+
 
     public TankMainFrame() {
         setSize(600, 400);
@@ -34,35 +35,36 @@ public class TankMainFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        g.setColor(Color.red);
-        g.fillRect(x, y, 100, 100);
+        tank.paint(g);
     }
 
     class MyKeyListener extends KeyAdapter {
         boolean bl = false, br = false, bu = false, bd = false;
+
         @Override
         public void keyPressed(KeyEvent e) {
             int keyCode = e.getKeyCode();
             switch (keyCode) {
                 case KeyEvent.VK_LEFT:
                     bl = true;
-                    br = false;
+                    //br = false;
                     break;
                 case KeyEvent.VK_UP:
                     bu = true;
-                    bd = false;
+                    //bd = false;
                     break;
                 case KeyEvent.VK_RIGHT:
                     br = true;
-                    bl = false;
+                    //bl = false;
                     break;
                 case KeyEvent.VK_DOWN:
                     bd = true;
-                    bu = false;
+                    //bu = false;
                     break;
                 default:
                     break;
             }
+            setMainTankDir();
         }
 
         @Override
@@ -83,6 +85,19 @@ public class TankMainFrame extends Frame {
                     break;
                 default:
                     break;
+            }
+            setMainTankDir();
+        }
+
+        private void setMainTankDir() {
+            if (!bl && !br && !bu && !bd) {
+                tank.setMoving(false);
+            } else {
+                tank.setMoving(true);
+                if (bl) tank.setDir(Dir.LEFT);
+                if (br) tank.setDir(Dir.RIGHT);
+                if (bu) tank.setDir(Dir.UP);
+                if (bd) tank.setDir(Dir.DOWN);
             }
         }
     }
