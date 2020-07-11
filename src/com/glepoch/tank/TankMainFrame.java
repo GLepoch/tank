@@ -62,13 +62,13 @@ public class TankMainFrame extends Frame {
         g.drawString("子弹数量：" + this.bulletList.size(), 20, 50);
         g.drawString("敌人数量：" + this.badTankList.size(), 20, 80);
         g.drawString("爆炸数量:" + explodeList.size(), 20, 100);
-        for (int i = 0; i < bulletList.size(); i++) {
-            bulletList.get(i).paint(g);
-        }
         for (int i = 0; i < badTankList.size(); i++) {
             badTankList.get(i).paint(g);
         }
         tank.paint(g);
+        for (int i = 0; i < bulletList.size(); i++) {
+            bulletList.get(i).paint(g);
+        }
         g.setColor(color);
         for (int i = 0; i < bulletList.size(); i++) {
             for (int i1 = 0; i1 < badTankList.size(); i1++) {

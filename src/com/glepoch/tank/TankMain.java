@@ -14,7 +14,7 @@ public class TankMain {
     public static void main(String[] args) {
         TankMainFrame tank = new TankMainFrame();
         for (int i = 0; i < 5; i++) {
-            tank.badTankList.add(new Tank(100 + i * 100, 50, Dir.DOWN, Group.BAD, tank));
+            tank.badTankList.add(new Tank(100 + i * 100, 200, Dir.LEFT, Group.BAD, tank));
         }
         //new Thread(()->new Audio("audio/war1.wav").loop()).start();
         while (true) {

@@ -48,16 +48,28 @@ public class Bullet {
         }
         switch (dir) {
             case LEFT:
-                g.drawImage(ResourceMgr.bulletL, x, y, null);
+                if (Group.GOOD == this.group)
+                    g.drawImage(ResourceMgr.bulletL, x, y, null);
+                else
+                    g.drawImage(ResourceMgr.badBulletL, x, y, null);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.bulletU, x, y, null);
+                if (Group.GOOD == this.group)
+                    g.drawImage(ResourceMgr.bulletU, x, y, null);
+                else
+                    g.drawImage(ResourceMgr.badBulletU, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.bulletR, x, y, null);
+                if (Group.GOOD == this.group)
+                    g.drawImage(ResourceMgr.bulletR, x, y, null);
+                else
+                    g.drawImage(ResourceMgr.badBulletR, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.bulletD, x, y, null);
+                if (Group.GOOD == this.group)
+                    g.drawImage(ResourceMgr.bulletD, x, y, null);
+                else
+                    g.drawImage(ResourceMgr.badBulletD, x, y, null);
                 break;
         }
         move();

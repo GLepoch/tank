@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Tank {
     private static final int SPEED = 3;
-    private boolean moving = false;
+    private boolean moving = true;
     TankMainFrame tmf = null;
     private int x = 50, y = 50;
     Dir dir = Dir.DOWN;
@@ -66,16 +66,28 @@ public class Tank {
         if (!alive) return;
         switch (dir) {
             case LEFT:
-                g.drawImage(ResourceMgr.tankL, x, y, null);
+                if (Group.GOOD == this.group)
+                    g.drawImage(ResourceMgr.tankL, x, y, null);
+                else
+                    g.drawImage(ResourceMgr.badTankL, x, y, null);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.tankU, x, y, null);
+                if (Group.GOOD == this.group)
+                    g.drawImage(ResourceMgr.tankU, x, y, null);
+                else
+                    g.drawImage(ResourceMgr.badTankU, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankR, x, y, null);
+                if (Group.GOOD == this.group)
+                    g.drawImage(ResourceMgr.tankR, x, y, null);
+                else
+                    g.drawImage(ResourceMgr.badTankR, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankD, x, y, null);
+                if (Group.GOOD == this.group)
+                    g.drawImage(ResourceMgr.tankD, x, y, null);
+                else
+                    g.drawImage(ResourceMgr.badTankD, x, y, null);
                 break;
         }
         move();
@@ -108,20 +120,40 @@ public class Tank {
         int BY = this.y + ResourceMgr.TY / 2 - ResourceMgr.BY / 2;
         switch (dir) {
             case LEFT:
-                BX = this.x;
-                BY = this.y + 22;
+                if (Group.GOOD == this.group) {
+                    BX = this.x;
+                    BY = this.y + 15;
+                } else {
+                    BX = this.x + 24;
+                    BY = this.y + 27;
+                }
                 break;
             case RIGHT:
-                BX = this.x + ResourceMgr.TX - 10;
-                BY = this.y + 23;
+                if (Group.GOOD == this.group) {
+                    BX = this.x + 24;
+                    BY = this.y + 14;
+                } else {
+                    BX = this.x + 26;
+                    BY = this.y + 28;
+                }
                 break;
             case UP:
-                BX = this.x + 20;
-                BY = this.y;
+                if (Group.GOOD == this.group) {
+                    BX = this.x + 15;
+                    BY = this.y + 5;
+                } else {
+                    BX = this.x + 24;
+                    BY = this.y + 22;
+                }
                 break;
             case DOWN:
-                BX = this.x + 18;
-                BY = this.y + ResourceMgr.TY - 10;
+                if (Group.GOOD == this.group) {
+                    BX = this.x + 16;
+                    BY = this.y + 22;
+                } else {
+                    BX = this.x + 24;
+                    BY = this.y + 22;
+                }
                 break;
         }
         tmf.bulletList.add(new Bullet(BX, BY, this.dir, this.group, this.tmf));
