@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Tank {
     private static final int SPEED = 3;
-    private boolean moving = true;
+    private boolean moving = false;
     TankMainFrame tmf = null;
     private int x = 50, y = 50;
     Dir dir = Dir.DOWN;

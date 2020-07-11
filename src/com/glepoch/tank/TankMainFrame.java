@@ -19,12 +19,11 @@ import java.util.List;
  */
 public class TankMainFrame extends Frame {
     Tank tank = new Tank(100, 300, Dir.UP, Group.GOOD, this);
-    //Bullet bullet=new Bullet(150,100,Dir.DOWN);
     private static final int GAME_WIDTH = 600;
     private static final int GAME_HEIGHT = 400;
     List<Bullet> bulletList = new ArrayList<>();
     public List<Tank> badTankList = new ArrayList<>();
-
+    public List<Explode> explodeList=new ArrayList<>();
 
     public TankMainFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -62,6 +61,7 @@ public class TankMainFrame extends Frame {
         g.setColor(Color.CYAN);
         g.drawString("子弹数量：" + this.bulletList.size(), 20, 50);
         g.drawString("敌人数量：" + this.badTankList.size(), 20, 80);
+        g.drawString("爆炸数量:" + explodeList.size(), 20, 100);
         for (int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).paint(g);
         }
@@ -74,6 +74,9 @@ public class TankMainFrame extends Frame {
             for (int i1 = 0; i1 < badTankList.size(); i1++) {
                 bulletList.get(i).collideWith(badTankList.get(i1));
             }
+        }
+        for (int i = 0; i < explodeList.size(); i++) {
+            explodeList.get(i).paint(g);
         }
     }
 
@@ -139,6 +142,7 @@ public class TankMainFrame extends Frame {
                 if (br) tank.setDir(Dir.RIGHT);
                 if (bu) tank.setDir(Dir.UP);
                 if (bd) tank.setDir(Dir.DOWN);
+
             }
         }
     }

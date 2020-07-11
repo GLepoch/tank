@@ -88,6 +88,9 @@ public class Bullet {
         if (brec.intersects(trec)) {
             this.die();
             tank.die();
+            int EX = this.x - 30;
+            int EY = this.y - 70;
+            tmf.explodeList.add(new Explode(EX, EY, tmf));
         }
     }
 
