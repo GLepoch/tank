@@ -10,7 +10,7 @@ public class Tank {
     private int x = 50, y = 50;
     Dir dir = Dir.DOWN;
     private boolean alive = true;
-    private Group group=Group.BAD;
+    private Group group = Group.BAD;
 
     public boolean isMoving() {
         return moving;
@@ -19,14 +19,15 @@ public class Tank {
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
-    private Random random=new Random();
 
-    public Tank(int x, int y, Dir dir, Group group,TankMainFrame tmf) {
+    private Random random = new Random();
+
+    public Tank(int x, int y, Dir dir, Group group, TankMainFrame tmf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tmf = tmf;
-        this.group=group;
+        this.group = group;
     }
 
     public int getX() {
@@ -97,9 +98,9 @@ public class Tank {
                 y += SPEED;
                 break;
         }
-           if(random.nextInt(10)>8&&this.group!=Group.GOOD){
-               this.fire();
-           }
+        if (random.nextInt(10) > 8 && this.group != Group.GOOD) {
+            this.fire();
+        }
     }
 
     public void fire() {
@@ -123,7 +124,7 @@ public class Tank {
                 BY = this.y + ResourceMgr.TY - 10;
                 break;
         }
-        tmf.bulletList.add(new Bullet(BX, BY, this.dir,this.group, this.tmf));
+        tmf.bulletList.add(new Bullet(BX, BY, this.dir, this.group, this.tmf));
     }
 
     public void die() {

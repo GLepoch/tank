@@ -12,11 +12,11 @@ import java.awt.event.WindowEvent;
  */
 public class TankMain {
     public static void main(String[] args) {
-        TankMainFrame tank=new TankMainFrame();
+        TankMainFrame tank = new TankMainFrame();
         for (int i = 0; i < 5; i++) {
-            tank.badTankList.add(new Tank(100+i*100,50,Dir.DOWN,Group.BAD,tank));
+            tank.badTankList.add(new Tank(100 + i * 100, 50, Dir.DOWN, Group.BAD, tank));
         }
-        while (true){
+        while (true) {
             try {
                 Thread.sleep(50);
                 tank.repaint();

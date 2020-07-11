@@ -18,7 +18,7 @@ import java.util.List;
  * @version: 1.0
  */
 public class TankMainFrame extends Frame {
-    Tank tank = new Tank(100, 300, Dir.UP,Group.GOOD, this);
+    Tank tank = new Tank(100, 300, Dir.UP, Group.GOOD, this);
     //Bullet bullet=new Bullet(150,100,Dir.DOWN);
     private static final int GAME_WIDTH = 600;
     private static final int GAME_HEIGHT = 400;
