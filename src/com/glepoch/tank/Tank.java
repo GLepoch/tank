@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Tank {
     private static final int SPEED = 3;
+    public Rectangle rect=new Rectangle();;
     private boolean moving = true;
     TankMainFrame tmf = null;
     private int x = 50, y = 50;
@@ -28,6 +29,10 @@ public class Tank {
         this.dir = dir;
         this.tmf = tmf;
         this.group = group;
+        rect.x=this.x;
+        rect.y=this.y;
+        rect.width=ResourceMgr.TX;
+        rect.height=ResourceMgr.TY;
     }
 
     public int getX() {
@@ -117,6 +122,8 @@ public class Tank {
             this.changeDir();
         }
         boundsCheck();
+        rect.x=this.x;
+        rect.y=this.y;
     }
 
     private void boundsCheck() {

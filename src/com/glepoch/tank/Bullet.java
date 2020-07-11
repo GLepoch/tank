@@ -9,6 +9,7 @@ public class Bullet {
     private boolean alive = true;
     TankMainFrame tmf = null;
     private Group group = Group.BAD;
+    Rectangle rect=new Rectangle();
 
     public int getX() {
         return x;
@@ -40,6 +41,10 @@ public class Bullet {
         this.dir = dir;
         this.tmf = tmf;
         this.group = group;
+        rect.x=this.x;
+        rect.y=this.y;
+        rect.width=ResourceMgr.TX;
+        rect.height=ResourceMgr.TY;
     }
 
     public void paint(Graphics g) {
@@ -90,15 +95,15 @@ public class Bullet {
                 y += SPEED;
                 break;
         }
+        rect.x=this.x;
+        rect.y=this.y;
         if (this.x < 0 || this.y < 0 || x > tmf.getWidth() || y > tmf.getHeight()) alive = false;
     }
 
     public void collideWith(Tank tank) {
         if(tank==null) return;
         if (this.group == tank.getGroup()) return;
-        Rectangle brec = new Rectangle(this.x, this.y, ResourceMgr.BX, ResourceMgr.BY);
-        Rectangle trec = new Rectangle(tank.getX(), tank.getY(), ResourceMgr.TX, ResourceMgr.TY);
-        if (brec.intersects(trec)) {
+        if (rect.intersects(tank.rect)) {
             this.die();
             tank.die();
             int EX = tank.getX()+ResourceMgr.TX/2-ResourceMgr.EX/2;
