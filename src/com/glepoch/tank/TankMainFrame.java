@@ -18,14 +18,14 @@ import java.util.List;
  * @version: 1.0
  */
 public class TankMainFrame extends Frame {
-    Tank tank = new Tank(100, 100, Dir.DOWN,this);
+    Tank tank = new Tank(100, 100, Dir.DOWN, this);
     //Bullet bullet=new Bullet(150,100,Dir.DOWN);
-    private static final int GAME_WIDTH=600;
+    private static final int GAME_WIDTH = 600;
     private static final int GAME_HEIGHT = 400;
-    List<Bullet> bulletList=new ArrayList<>();
+    List<Bullet> bulletList = new ArrayList<>();
 
     public TankMainFrame() {
-        setSize(GAME_WIDTH , GAME_HEIGHT);
+        setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(true);
         setTitle("Tank");
         setVisible(true);
@@ -39,9 +39,10 @@ public class TankMainFrame extends Frame {
     }
 
     Image offScreenImage = null;
+
     @Override
     public void update(Graphics g) {
-        if(offScreenImage == null) {
+        if (offScreenImage == null) {
             offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
@@ -57,7 +58,7 @@ public class TankMainFrame extends Frame {
     public void paint(Graphics g) {
         Color color = g.getColor();
         g.setColor(Color.CYAN);
-        g.drawString("子弹数量："+this.bulletList.size(),20,50);
+        g.drawString("子弹数量：" + this.bulletList.size(), 20, 50);
         tank.paint(g);
         for (int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).paint(g);

@@ -6,8 +6,8 @@ public class Bullet {
     private static final int SPEED = 5;
     int x = 10, y = 10;
     Dir dir = Dir.DOWN;
-    private boolean alive=true;
-    TankMainFrame tmf=null;
+    private boolean alive = true;
+    TankMainFrame tmf = null;
 
     public int getX() {
         return x;
@@ -33,15 +33,15 @@ public class Bullet {
         this.dir = dir;
     }
 
-    public Bullet(int x, int y, Dir dir,TankMainFrame tmf) {
+    public Bullet(int x, int y, Dir dir, TankMainFrame tmf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tmf=tmf;
+        this.tmf = tmf;
     }
 
     public void paint(Graphics g) {
-        if(!alive){
+        if (!alive) {
             this.tmf.bulletList.remove(this);
         }
         g.fillOval(x, y, 10, 10);
@@ -63,6 +63,6 @@ public class Bullet {
                 y += SPEED;
                 break;
         }
-        if(this.x<0||this.y<0||x>tmf.getWidth()||y>tmf.getHeight()) alive=false;
+        if (this.x < 0 || this.y < 0 || x > tmf.getWidth() || y > tmf.getHeight()) alive = false;
     }
 }

@@ -5,7 +5,7 @@ import java.awt.*;
 public class Tank {
     private static final int SPEED = 5;
     private boolean moving = false;
-    TankMainFrame tmf=null;
+    TankMainFrame tmf = null;
     int x = 10, y = 10;
     Dir dir = Dir.DOWN;
 
@@ -17,11 +17,11 @@ public class Tank {
         this.moving = moving;
     }
 
-    public Tank(int x, int y, Dir dir,TankMainFrame tmf) {
+    public Tank(int x, int y, Dir dir, TankMainFrame tmf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tmf=tmf;
+        this.tmf = tmf;
     }
 
     public int getX() {
@@ -73,6 +73,6 @@ public class Tank {
     }
 
     public void fire() {
-       tmf.bulletList.add(new Bullet(this.x,this.y,this.dir,this.tmf));
+        tmf.bulletList.add(new Bullet(this.x, this.y, this.dir, this.tmf));
     }
 }
