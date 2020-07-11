@@ -6,9 +6,8 @@ public class Tank {
     private static final int SPEED = 5;
     private boolean moving = false;
     TankMainFrame tmf = null;
-    int x = 10, y = 10;
+    int x = 50, y = 50;
     Dir dir = Dir.DOWN;
-
     public boolean isMoving() {
         return moving;
     }
@@ -49,7 +48,20 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        g.fillRect(x, y, 20, 20);
+        switch(dir) {
+            case LEFT:
+                g.drawImage(ResourceMgr.tankL, x, y, null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.tankU, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.tankR, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.tankD, x, y, null);
+                break;
+        }
         move();
     }
 
@@ -73,6 +85,26 @@ public class Tank {
     }
 
     public void fire() {
-        tmf.bulletList.add(new Bullet(this.x, this.y, this.dir, this.tmf));
+        int BX=this.x+ResourceMgr.TX/2-ResourceMgr.BX/2;
+        int BY=this.y+ResourceMgr.TY/2-ResourceMgr.BY/2;
+        switch (dir) {
+            case LEFT:
+                BX = this.x;
+                BY=this.y+22;
+                break;
+            case RIGHT:
+                BX = this.x+ResourceMgr.TX-10;
+                BY=this.y+23;
+                break;
+            case UP:
+                BX = this.x+20;
+                BY=this.y;
+                break;
+            case DOWN:
+                BX = this.x+18;
+                BY=this.y+ResourceMgr.TY-10;
+                break;
+        }
+        tmf.bulletList.add(new Bullet(BX, BY, this.dir, this.tmf));
     }
 }

@@ -44,7 +44,20 @@ public class Bullet {
         if (!alive) {
             this.tmf.bulletList.remove(this);
         }
-        g.fillOval(x, y, 10, 10);
+        switch(dir) {
+            case LEFT:
+                g.drawImage(ResourceMgr.bulletL, x, y, null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.bulletU, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.bulletR, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.bulletD, x, y, null);
+                break;
+        }
         move();
     }
 
