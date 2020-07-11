@@ -14,7 +14,7 @@ public class TankMain {
     public static void main(String[] args) {
         TankMainFrame tank=new TankMainFrame();
         for (int i = 0; i < 5; i++) {
-            tank.badTankList.add(new Tank(100+i*100,50,Dir.DOWN,tank));
+            tank.badTankList.add(new Tank(100+i*100,50,Dir.DOWN,Group.BAD,tank));
         }
         while (true){
             try {

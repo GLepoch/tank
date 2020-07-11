@@ -3,11 +3,12 @@ package com.glepoch.tank;
 import java.awt.*;
 
 public class Bullet {
-    private static final int SPEED = 5;
+    private static final int SPEED = 10;
     int x = 10, y = 10;
     Dir dir = Dir.DOWN;
     private boolean alive = true;
     TankMainFrame tmf = null;
+    private Group group=Group.BAD;
 
     public int getX() {
         return x;
@@ -33,11 +34,12 @@ public class Bullet {
         this.dir = dir;
     }
 
-    public Bullet(int x, int y, Dir dir, TankMainFrame tmf) {
+    public Bullet(int x, int y, Dir dir, Group group, TankMainFrame tmf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tmf = tmf;
+        this.group=group;
     }
 
     public void paint(Graphics g) {
@@ -80,6 +82,7 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
+        if(this.group==tank.getGroup()) return;
         Rectangle brec = new Rectangle(this.x, this.y, ResourceMgr.BX, ResourceMgr.BY);
         Rectangle trec = new Rectangle(tank.getX(), tank.getY(), ResourceMgr.TX, ResourceMgr.TY);
         if (brec.intersects(trec)) {
