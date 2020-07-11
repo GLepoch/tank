@@ -94,14 +94,15 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
+        if(tank==null) return;
         if (this.group == tank.getGroup()) return;
         Rectangle brec = new Rectangle(this.x, this.y, ResourceMgr.BX, ResourceMgr.BY);
         Rectangle trec = new Rectangle(tank.getX(), tank.getY(), ResourceMgr.TX, ResourceMgr.TY);
         if (brec.intersects(trec)) {
             this.die();
             tank.die();
-            int EX = this.x - 30;
-            int EY = this.y - 70;
+            int EX = tank.getX()+ResourceMgr.TX/2-ResourceMgr.EX/2;
+            int EY = tank.getY() +ResourceMgr.TY/2-ResourceMgr.EY/2;
             tmf.explodeList.add(new Explode(EX, EY, tmf));
         }
     }

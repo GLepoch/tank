@@ -19,8 +19,8 @@ import java.util.List;
  */
 public class TankMainFrame extends Frame {
     Tank tank = new Tank(100, 300, Dir.UP, Group.GOOD, this);
-    private static final int GAME_WIDTH = 600;
-    private static final int GAME_HEIGHT = 400;
+    public static final int GAME_WIDTH = 600;
+    public static final int GAME_HEIGHT = 400;
     List<Bullet> bulletList = new ArrayList<>();
     public List<Tank> badTankList = new ArrayList<>();
     public List<Explode> explodeList=new ArrayList<>();
@@ -65,6 +65,7 @@ public class TankMainFrame extends Frame {
         for (int i = 0; i < badTankList.size(); i++) {
             badTankList.get(i).paint(g);
         }
+        if(tank!=null)
         tank.paint(g);
         for (int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).paint(g);
@@ -74,6 +75,9 @@ public class TankMainFrame extends Frame {
             for (int i1 = 0; i1 < badTankList.size(); i1++) {
                 bulletList.get(i).collideWith(badTankList.get(i1));
             }
+        }
+        for (int i = 0; i < bulletList.size(); i++) {
+                bulletList.get(i).collideWith(tank);
         }
         for (int i = 0; i < explodeList.size(); i++) {
             explodeList.get(i).paint(g);
@@ -111,6 +115,7 @@ public class TankMainFrame extends Frame {
 
         @Override
         public void keyReleased(KeyEvent e) {
+            if(tank==null) return;
             int keyCode = e.getKeyCode();
             switch (keyCode) {
                 case KeyEvent.VK_LEFT:
@@ -134,6 +139,7 @@ public class TankMainFrame extends Frame {
         }
 
         private void setMainTankDir() {
+            if(tank==null) return;
             if (!bl && !br && !bu && !bd) {
                 tank.setMoving(false);
             } else {

@@ -110,9 +110,24 @@ public class Tank {
                 y += SPEED;
                 break;
         }
-        if (random.nextInt(10) > 8 && this.group != Group.GOOD) {
+        if (random.nextInt(100) > 95 && this.group != Group.GOOD) {
             this.fire();
         }
+        if (random.nextInt(100) > 95 && this.group != Group.GOOD) {
+            this.changeDir();
+        }
+        boundsCheck();
+    }
+
+    private void boundsCheck() {
+        if (this.x < 0) this.x = 0;
+        if (this.x > TankMainFrame.GAME_WIDTH - ResourceMgr.TX) this.x = TankMainFrame.GAME_WIDTH - ResourceMgr.TX;
+        if (this.y < 50) this.y = 50;
+        if (this.y > TankMainFrame.GAME_HEIGHT - ResourceMgr.TY) this.y = TankMainFrame.GAME_HEIGHT - ResourceMgr.TY;
+    }
+
+    private void changeDir() {
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     public void fire() {
@@ -161,6 +176,8 @@ public class Tank {
 
     public void die() {
         alive = false;
+        System.out.println(this.alive + "   " + this.group);
         tmf.badTankList.remove(this);
+        tmf.tank = null;
     }
 }
