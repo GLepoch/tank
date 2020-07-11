@@ -13,6 +13,9 @@ import java.awt.event.WindowEvent;
 public class TankMain {
     public static void main(String[] args) {
         TankMainFrame tank=new TankMainFrame();
+        for (int i = 0; i < 5; i++) {
+            tank.tankList.add(new Tank(100+i*100,50,Dir.DOWN,tank));
+        }
         while (true){
             try {
                 Thread.sleep(50);
