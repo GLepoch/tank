@@ -23,7 +23,7 @@ public class TankMainFrame extends Frame {
     private static final int GAME_WIDTH = 600;
     private static final int GAME_HEIGHT = 400;
     List<Bullet> bulletList = new ArrayList<>();
-    public   List<Tank> tankList=new ArrayList<>();
+    public   List<Tank> badTankList=new ArrayList<>();
 
 
     public TankMainFrame() {
@@ -64,8 +64,8 @@ public class TankMainFrame extends Frame {
         for (int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).paint(g);
         }
-        for (int i = 0; i < tankList.size(); i++) {
-            tankList.get(i).paint(g);
+        for (int i = 0; i < badTankList.size(); i++) {
+            badTankList.get(i).paint(g);
         }
         tank.paint(g);
         g.setColor(color);
