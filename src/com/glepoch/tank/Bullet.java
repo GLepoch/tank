@@ -44,7 +44,7 @@ public class Bullet {
         if (!alive) {
             this.tmf.bulletList.remove(this);
         }
-        switch(dir) {
+        switch (dir) {
             case LEFT:
                 g.drawImage(ResourceMgr.bulletL, x, y, null);
                 break;
@@ -77,5 +77,18 @@ public class Bullet {
                 break;
         }
         if (this.x < 0 || this.y < 0 || x > tmf.getWidth() || y > tmf.getHeight()) alive = false;
+    }
+
+    public void collideWith(Tank tank) {
+        Rectangle brec = new Rectangle(this.x, this.y, ResourceMgr.BX, ResourceMgr.BY);
+        Rectangle trec = new Rectangle(tank.getX(), tank.getY(), ResourceMgr.TX, ResourceMgr.TY);
+        if (brec.intersects(trec)) {
+            this.die();
+            tank.die();
+        }
+    }
+
+    private void die() {
+        alive = false;
     }
 }

@@ -23,7 +23,7 @@ public class TankMainFrame extends Frame {
     private static final int GAME_WIDTH = 600;
     private static final int GAME_HEIGHT = 400;
     List<Bullet> bulletList = new ArrayList<>();
-    public   List<Tank> badTankList=new ArrayList<>();
+    public List<Tank> badTankList = new ArrayList<>();
 
 
     public TankMainFrame() {
@@ -61,6 +61,7 @@ public class TankMainFrame extends Frame {
         Color color = g.getColor();
         g.setColor(Color.CYAN);
         g.drawString("子弹数量：" + this.bulletList.size(), 20, 50);
+        g.drawString("敌人数量：" + this.badTankList.size(), 20, 80);
         for (int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).paint(g);
         }
@@ -69,6 +70,11 @@ public class TankMainFrame extends Frame {
         }
         tank.paint(g);
         g.setColor(color);
+        for (int i = 0; i < bulletList.size(); i++) {
+            for (int i1 = 0; i1 < badTankList.size(); i1++) {
+                bulletList.get(i).collideWith(badTankList.get(i1));
+            }
+        }
     }
 
     class MyKeyListener extends KeyAdapter {

@@ -6,8 +6,10 @@ public class Tank {
     private static final int SPEED = 5;
     private boolean moving = false;
     TankMainFrame tmf = null;
-    int x = 50, y = 50;
+    private int x = 50, y = 50;
     Dir dir = Dir.DOWN;
+    private boolean alive = true;
+
     public boolean isMoving() {
         return moving;
     }
@@ -48,7 +50,8 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        switch(dir) {
+        if (!alive) return;
+        switch (dir) {
             case LEFT:
                 g.drawImage(ResourceMgr.tankL, x, y, null);
                 break;
@@ -85,26 +88,31 @@ public class Tank {
     }
 
     public void fire() {
-        int BX=this.x+ResourceMgr.TX/2-ResourceMgr.BX/2;
-        int BY=this.y+ResourceMgr.TY/2-ResourceMgr.BY/2;
+        int BX = this.x + ResourceMgr.TX / 2 - ResourceMgr.BX / 2;
+        int BY = this.y + ResourceMgr.TY / 2 - ResourceMgr.BY / 2;
         switch (dir) {
             case LEFT:
                 BX = this.x;
-                BY=this.y+22;
+                BY = this.y + 22;
                 break;
             case RIGHT:
-                BX = this.x+ResourceMgr.TX-10;
-                BY=this.y+23;
+                BX = this.x + ResourceMgr.TX - 10;
+                BY = this.y + 23;
                 break;
             case UP:
-                BX = this.x+20;
-                BY=this.y;
+                BX = this.x + 20;
+                BY = this.y;
                 break;
             case DOWN:
-                BX = this.x+18;
-                BY=this.y+ResourceMgr.TY-10;
+                BX = this.x + 18;
+                BY = this.y + ResourceMgr.TY - 10;
                 break;
         }
         tmf.bulletList.add(new Bullet(BX, BY, this.dir, this.tmf));
+    }
+
+    public void die() {
+        alive = false;
+        tmf.badTankList.remove(this);
     }
 }
