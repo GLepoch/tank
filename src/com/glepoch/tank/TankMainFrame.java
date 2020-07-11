@@ -8,6 +8,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @description:
@@ -16,11 +18,14 @@ import java.awt.event.WindowEvent;
  * @version: 1.0
  */
 public class TankMainFrame extends Frame {
-    Tank tank = new Tank(100, 100, Dir.DOWN);
-    Bullet bullet=new Bullet(150,100,Dir.DOWN);
+    Tank tank = new Tank(100, 100, Dir.DOWN,this);
+    //Bullet bullet=new Bullet(150,100,Dir.DOWN);
+    private static final int GAME_WIDTH=600;
+    private static final int GAME_HEIGHT = 400;
+    List<Bullet> bulletList=new ArrayList<>();
 
     public TankMainFrame() {
-        setSize(600, 400);
+        setSize(GAME_WIDTH , GAME_HEIGHT);
         setResizable(true);
         setTitle("Tank");
         setVisible(true);
@@ -33,10 +38,31 @@ public class TankMainFrame extends Frame {
         });
     }
 
+    Image offScreenImage = null;
+    @Override
+    public void update(Graphics g) {
+        if(offScreenImage == null) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage, 0, 0, null);
+    }
+
     @Override
     public void paint(Graphics g) {
+        Color color = g.getColor();
+        g.setColor(Color.CYAN);
+        g.drawString("子弹数量："+this.bulletList.size(),20,50);
         tank.paint(g);
-        bullet.paint(g);
+        for (int i = 0; i < bulletList.size(); i++) {
+            bulletList.get(i).paint(g);
+        }
+        g.setColor(color);
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -84,6 +110,8 @@ public class TankMainFrame extends Frame {
                 case KeyEvent.VK_DOWN:
                     bd = false;
                     break;
+                case KeyEvent.VK_CONTROL:
+                    tank.fire();
                 default:
                     break;
             }
