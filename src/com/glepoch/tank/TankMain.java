@@ -16,7 +16,8 @@ public class TankMain {
     public static void main(String[] args) {
         Random random=new Random();
         TankMainFrame tank = new TankMainFrame();
-        for (int i = 0; i < 5; i++) {
+        Integer badTankCount = PropertiesMgr.getInt("badTankCount");
+        for (int i = 0; i < badTankCount; i++) {
             int btx = random.nextInt(TankMainFrame.GAME_WIDTH);
             int bty = random.nextInt(TankMainFrame.GAME_HEIGHT);
             Dir dir = Dir.values()[random.nextInt(4)];

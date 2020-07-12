@@ -1,0 +1,14 @@
+#初始化敌方坦克数量
+badTankCount=10
+#游戏画布宽度
+gameWidth=800
+#游戏画布高度
+gameHeight=600
+#坦克移动速度
+tankSpeed=1
+#子弹移动速度
+bulletSpeed=3
+#好坦克出现X轴位置
+goodTankX=400
+#好坦克出现Y轴位置
+goodTankY=500
