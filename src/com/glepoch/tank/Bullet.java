@@ -3,7 +3,7 @@ package com.glepoch.tank;
 import java.awt.*;
 
 public class Bullet {
-    private static final int SPEED = 10;
+    private static final int SPEED = 5;
     int x = 10, y = 10;
     Dir dir = Dir.DOWN;
     private boolean alive = true;

@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class Tank {
-    private static final int SPEED = 3;
+    private static final int SPEED = 1;
     public Rectangle rect=new Rectangle();;
     private boolean moving = true;
     TankMainFrame tmf = null;
