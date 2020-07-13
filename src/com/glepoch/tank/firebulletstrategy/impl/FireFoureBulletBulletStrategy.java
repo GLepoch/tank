@@ -2,6 +2,8 @@ package com.glepoch.tank.firebulletstrategy.impl;
 
 import com.glepoch.tank.*;
 import com.glepoch.tank.firebulletstrategy.FireBulletStrategy;
+import com.glepoch.tank.tankgroupfactory.bullet.impl.Bullet;
+import com.glepoch.tank.tankgroupfactory.tank.impl.Tank;
 import enums.Dir;
 import enums.Group;
 

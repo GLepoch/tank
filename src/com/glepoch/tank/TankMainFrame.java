@@ -2,6 +2,9 @@ package com.glepoch.tank;
 
 
 import com.glepoch.tank.firebulletstrategy.impl.FireOneBulletBulletStrategy;
+import com.glepoch.tank.tankgroupfactory.bullet.impl.Bullet;
+import com.glepoch.tank.tankgroupfactory.explode.impl.Explode;
+import com.glepoch.tank.tankgroupfactory.tank.impl.Tank;
 import com.glepoch.tank.tankimageStrategy.impl.GoodTankStrategy;
 import enums.Dir;
 import enums.Group;
@@ -21,7 +24,7 @@ import java.util.List;
  * @version: 1.0
  */
 public class TankMainFrame extends Frame {
-    Tank tank = new Tank(PropertiesMgr.getInt("goodTankX"), PropertiesMgr.getInt("goodTankY"), Dir.UP, Group.GOOD, this,new FireOneBulletBulletStrategy(),new GoodTankStrategy());
+    public Tank tank = new Tank(PropertiesMgr.getInt("goodTankX"), PropertiesMgr.getInt("goodTankY"), Dir.UP, Group.GOOD, this,new FireOneBulletBulletStrategy(),new GoodTankStrategy());
     public static final int GAME_WIDTH = PropertiesMgr.getInt("gameWidth");
     public static final int GAME_HEIGHT =  PropertiesMgr.getInt("gameHeight");;
     public List<Bullet> bulletList = new ArrayList<>();
@@ -145,13 +148,13 @@ public class TankMainFrame extends Frame {
         private void setMainTankDir() {
             if(tank==null) return;
             if (!bl && !br && !bu && !bd) {
-                tank.setMoving(false);
+                tank.moving=false;
             } else {
-                tank.setMoving(true);
-                if (bl) tank.setDir(Dir.LEFT);
-                if (br) tank.setDir(Dir.RIGHT);
-                if (bu) tank.setDir(Dir.UP);
-                if (bd) tank.setDir(Dir.DOWN);
+                tank.moving=true;
+                if (bl) tank.dir=Dir.LEFT;
+                if (br) tank.dir=Dir.RIGHT;
+                if (bu) tank.dir=Dir.UP;
+                if (bd) tank.dir=Dir.DOWN;
 
             }
         }

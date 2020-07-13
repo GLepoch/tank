@@ -1,44 +1,25 @@
-package com.glepoch.tank;
+package com.glepoch.tank.tankgroupfactory.bullet;
 
+import com.glepoch.tank.tankgroupfactory.explode.impl.Explode;
+import com.glepoch.tank.PropertiesMgr;
+import com.glepoch.tank.ResourceMgr;
+import com.glepoch.tank.TankMainFrame;
+import com.glepoch.tank.tankgroupfactory.tank.impl.Tank;
 import enums.Dir;
 import enums.Group;
 
 import java.awt.*;
 
-public class Bullet {
-    private static final int SPEED =  PropertiesMgr.getInt("bulletSpeed");;
-    int x = 10, y = 10;
-    Dir dir = Dir.DOWN;
-    private boolean alive = true;
-    TankMainFrame tmf = null;
-    private Group group = Group.BAD;
-    Rectangle rect=new Rectangle();
+public abstract class BulletAbstarct {
+    public static final int SPEED =  PropertiesMgr.getInt("bulletSpeed");;
+    public int x = 10, y = 10;
+    public Dir dir = Dir.DOWN;
+    public boolean alive = true;
+    public TankMainFrame tmf = null;
+    public Group group = Group.BAD;
+    public Rectangle rect=new Rectangle();
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public Dir getDir() {
-        return dir;
-    }
-
-    public void setDir(Dir dir) {
-        this.dir = dir;
-    }
-
-    public Bullet(int x, int y, Dir dir, Group group, TankMainFrame tmf) {
+    public BulletAbstarct(int x, int y, Dir dir, Group group, TankMainFrame tmf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -83,7 +64,7 @@ public class Bullet {
         move();
     }
 
-    private void move() {
+    public void move() {
         switch (dir) {
             case LEFT:
                 x -= SPEED;
@@ -105,17 +86,17 @@ public class Bullet {
 
     public void collideWith(Tank tank) {
         if(tank==null) return;
-        if (this.group == tank.getGroup()) return;
+        if (this.group == tank.group) return;
         if (rect.intersects(tank.rect)) {
             this.die();
             tank.die();
-            int EX = tank.getX()+ResourceMgr.newInstance().TX/2-ResourceMgr.newInstance().EX/2;
-            int EY = tank.getY() +ResourceMgr.newInstance().TY/2-ResourceMgr.newInstance().EY/2;
+            int EX = tank.x+ResourceMgr.newInstance().TX/2-ResourceMgr.newInstance().EX/2;
+            int EY = tank.y +ResourceMgr.newInstance().TY/2-ResourceMgr.newInstance().EY/2;
             tmf.explodeList.add(new Explode(EX, EY, tmf));
         }
     }
 
-    private void die() {
+    public void die() {
         alive = false;
     }
 }

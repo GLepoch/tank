@@ -1,10 +1,10 @@
 package com.glepoch.tank.firebulletstrategy.impl;
 
-import com.glepoch.tank.Bullet;
+import com.glepoch.tank.tankgroupfactory.bullet.impl.Bullet;
 import com.glepoch.tank.firebulletstrategy.FireBulletStrategy;
 import enums.Group;
 import com.glepoch.tank.ResourceMgr;
-import com.glepoch.tank.Tank;
+import com.glepoch.tank.tankgroupfactory.tank.impl.Tank;
 
 public class FireOneBulletBulletStrategy implements FireBulletStrategy {
     @Override
