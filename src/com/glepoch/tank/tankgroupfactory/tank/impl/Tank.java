@@ -13,7 +13,7 @@ import java.awt.*;
 public class Tank extends TankAbstract {
 
     public Tank(int x, int y, Dir dir, Group group, TankMainFrame tmf, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy, TankGroupAbtractFactory tankGroupAbtractFactory) {
-        super(x, y, dir, group, tmf, fireBulletStrategy, tankImageStrategy,tankGroupAbtractFactory);
+        super(x, y, dir, group, tmf, fireBulletStrategy, tankImageStrategy, tankGroupAbtractFactory);
 
     }
 
@@ -24,7 +24,7 @@ public class Tank extends TankAbstract {
 
     @Override
     public void fire() {
-        fireBulletStrategy.fire(this,tankGroupAbtractFactory);
+        fireBulletStrategy.fire(this, tankGroupAbtractFactory);
     }
 
 

@@ -15,13 +15,13 @@ import enums.Group;
 
 public class GoodTankGroup extends TankGroupAbtractFactory {
     @Override
-    public TankAbstract createTank(int x, int y, Dir dir, Group group, TankMainFrame tmf, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy,TankGroupAbtractFactory tankGroupAbtractFactory) {
-        return new Tank(x, y, dir, group, tmf, fireBulletStrategy, tankImageStrategy,tankGroupAbtractFactory);
+    public TankAbstract createTank(int x, int y, Dir dir, Group group, TankMainFrame tmf, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy, TankGroupAbtractFactory tankGroupAbtractFactory) {
+        return new Tank(x, y, dir, group, tmf, fireBulletStrategy, tankImageStrategy, tankGroupAbtractFactory);
     }
 
     @Override
-    public BulletAbstarct createBullet(int x, int y, Dir dir, Group group, TankMainFrame tmf,TankGroupAbtractFactory tankGroupAbtractFactory) {
-        return new Bullet(x, y, dir, group, tmf,tankGroupAbtractFactory);
+    public BulletAbstarct createBullet(int x, int y, Dir dir, Group group, TankMainFrame tmf, TankGroupAbtractFactory tankGroupAbtractFactory) {
+        return new Bullet(x, y, dir, group, tmf, tankGroupAbtractFactory);
     }
 
     @Override

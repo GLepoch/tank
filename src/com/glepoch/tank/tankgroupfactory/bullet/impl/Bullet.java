@@ -9,6 +9,6 @@ import enums.Group;
 public class Bullet extends BulletAbstarct {
 
     public Bullet(int x, int y, Dir dir, Group group, TankMainFrame tmf, TankGroupAbtractFactory tankGroupAbtractFactory) {
-        super(x, y, dir, group, tmf,tankGroupAbtractFactory);
+        super(x, y, dir, group, tmf, tankGroupAbtractFactory);
     }
 }

@@ -52,7 +52,9 @@ public class ResourceMgr {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    };
+    }
+
+    ;
 
     public static ResourceMgr newInstance() {
         return RESOURCE_MGR;

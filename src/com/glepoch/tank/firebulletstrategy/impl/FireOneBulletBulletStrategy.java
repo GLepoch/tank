@@ -49,6 +49,6 @@ public class FireOneBulletBulletStrategy implements FireBulletStrategy {
                 }
                 break;
         }
-        tank.tmf.bulletList.add(tankGroupAbtractFactory.createBullet(BX, BY, tank.dir, tank.group, tank.tmf,tankGroupAbtractFactory));
+        tank.tmf.bulletList.add(tankGroupAbtractFactory.createBullet(BX, BY, tank.dir, tank.group, tank.tmf, tankGroupAbtractFactory));
     }
 }

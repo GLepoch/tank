@@ -10,9 +10,9 @@ import enums.Dir;
 import enums.Group;
 
 public abstract class TankGroupAbtractFactory {
-    public abstract TankAbstract createTank(int x, int y, Dir dir, Group group, TankMainFrame tmf, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy,TankGroupAbtractFactory tankGroupAbtractFactory);
+    public abstract TankAbstract createTank(int x, int y, Dir dir, Group group, TankMainFrame tmf, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy, TankGroupAbtractFactory tankGroupAbtractFactory);
 
-    public abstract BulletAbstarct createBullet(int x, int y, Dir dir, Group group, TankMainFrame tmf,TankGroupAbtractFactory tankGroupAbtractFactory);
+    public abstract BulletAbstarct createBullet(int x, int y, Dir dir, Group group, TankMainFrame tmf, TankGroupAbtractFactory tankGroupAbtractFactory);
 
     public abstract ExplodeAbstract createExplode(int x, int y, TankMainFrame tmf);
 }

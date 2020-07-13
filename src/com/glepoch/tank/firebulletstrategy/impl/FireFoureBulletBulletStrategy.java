@@ -50,9 +50,9 @@ public class FireFoureBulletBulletStrategy implements FireBulletStrategy {
                 }
                 break;
         }
-        tank.tmf.bulletList.add(tankGroupAbtractFactory.createBullet(BX, BY, Dir.LEFT, tank.group, tank.tmf,tankGroupAbtractFactory));
-        tank.tmf.bulletList.add(tankGroupAbtractFactory.createBullet(BX, BY, Dir.RIGHT, tank.group, tank.tmf,tankGroupAbtractFactory));
-        tank.tmf.bulletList.add(tankGroupAbtractFactory.createBullet(BX, BY, Dir.UP, tank.group, tank.tmf,tankGroupAbtractFactory));
-        tank.tmf.bulletList.add(tankGroupAbtractFactory.createBullet(BX, BY, Dir.DOWN, tank.group, tank.tmf,tankGroupAbtractFactory));
+        tank.tmf.bulletList.add(tankGroupAbtractFactory.createBullet(BX, BY, Dir.LEFT, tank.group, tank.tmf, tankGroupAbtractFactory));
+        tank.tmf.bulletList.add(tankGroupAbtractFactory.createBullet(BX, BY, Dir.RIGHT, tank.group, tank.tmf, tankGroupAbtractFactory));
+        tank.tmf.bulletList.add(tankGroupAbtractFactory.createBullet(BX, BY, Dir.UP, tank.group, tank.tmf, tankGroupAbtractFactory));
+        tank.tmf.bulletList.add(tankGroupAbtractFactory.createBullet(BX, BY, Dir.DOWN, tank.group, tank.tmf, tankGroupAbtractFactory));
     }
 }

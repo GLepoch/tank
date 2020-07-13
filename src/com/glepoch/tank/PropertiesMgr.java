@@ -18,10 +18,12 @@ public class PropertiesMgr {
         if (prop == null || prop.size() == 0) return null;
         return prop.get(key);
     }
+
     public static int getInt(String key) {
         if (prop == null || prop.size() == 0) return 0;
-        return Integer.valueOf((String)prop.get(key));
+        return Integer.valueOf((String) prop.get(key));
     }
+
     public static String getString(String key) {
         if (prop == null || prop.size() == 0) return null;
         return (String) prop.get(key);

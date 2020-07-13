@@ -11,13 +11,14 @@ import enums.Group;
 import java.awt.*;
 
 public abstract class BulletAbstarct {
-    public static final int SPEED =  PropertiesMgr.getInt("bulletSpeed");;
+    public static final int SPEED = PropertiesMgr.getInt("bulletSpeed");
+    ;
     public int x = 10, y = 10;
     public Dir dir = Dir.DOWN;
     public boolean alive = true;
     public TankMainFrame tmf = null;
     public Group group = Group.BAD;
-    public Rectangle rect=new Rectangle();
+    public Rectangle rect = new Rectangle();
     public TankGroupAbtractFactory tankGroupAbtractFactory;
 
     public BulletAbstarct(int x, int y, Dir dir, Group group, TankMainFrame tmf, TankGroupAbtractFactory tankGroupAbtractFactory) {
@@ -26,11 +27,11 @@ public abstract class BulletAbstarct {
         this.dir = dir;
         this.tmf = tmf;
         this.group = group;
-        rect.x=this.x;
-        rect.y=this.y;
-        rect.width=ResourceMgr.newInstance().TX;
-        rect.height=ResourceMgr.newInstance().TY;
-        this.tankGroupAbtractFactory=tankGroupAbtractFactory;
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = ResourceMgr.newInstance().TX;
+        rect.height = ResourceMgr.newInstance().TY;
+        this.tankGroupAbtractFactory = tankGroupAbtractFactory;
     }
 
     public void paint(Graphics g) {
@@ -81,19 +82,19 @@ public abstract class BulletAbstarct {
                 y += SPEED;
                 break;
         }
-        rect.x=this.x;
-        rect.y=this.y;
+        rect.x = this.x;
+        rect.y = this.y;
         if (this.x < 0 || this.y < 0 || x > tmf.getWidth() || y > tmf.getHeight()) alive = false;
     }
 
     public void collideWith(TankAbstract tank) {
-        if(tank==null) return;
+        if (tank == null) return;
         if (this.group == tank.group) return;
         if (rect.intersects(tank.rect)) {
             this.die();
             tank.die();
-            int EX = tank.x+ResourceMgr.newInstance().TX/2-ResourceMgr.newInstance().EX/2;
-            int EY = tank.y +ResourceMgr.newInstance().TY/2-ResourceMgr.newInstance().EY/2;
+            int EX = tank.x + ResourceMgr.newInstance().TX / 2 - ResourceMgr.newInstance().EX / 2;
+            int EY = tank.y + ResourceMgr.newInstance().TY / 2 - ResourceMgr.newInstance().EY / 2;
             tmf.explodeList.add(tankGroupAbtractFactory.createExplode(EX, EY, tmf));
         }
     }

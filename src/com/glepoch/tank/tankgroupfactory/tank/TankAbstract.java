@@ -28,7 +28,7 @@ public abstract class TankAbstract {
     public Random random = new Random();
     public TankGroupAbtractFactory tankGroupAbtractFactory;
 
-    public TankAbstract(int x, int y, Dir dir, Group group, TankMainFrame tmf, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy,TankGroupAbtractFactory tankGroupAbtractFactory) {
+    public TankAbstract(int x, int y, Dir dir, Group group, TankMainFrame tmf, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy, TankGroupAbtractFactory tankGroupAbtractFactory) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -40,7 +40,7 @@ public abstract class TankAbstract {
         rect.height = ResourceMgr.newInstance().TY;
         this.fireBulletStrategy = fireBulletStrategy;
         this.tankImageStrategy = tankImageStrategy;
-        this.tankGroupAbtractFactory=tankGroupAbtractFactory;
+        this.tankGroupAbtractFactory = tankGroupAbtractFactory;
     }
 
     public abstract void paint(Graphics g);
@@ -75,9 +75,11 @@ public abstract class TankAbstract {
 
     public void boundsCheck() {
         if (this.x < 0) this.x = 0;
-        if (this.x > TankMainFrame.GAME_WIDTH - ResourceMgr.newInstance().TX) this.x = TankMainFrame.GAME_WIDTH - ResourceMgr.newInstance().TX;
+        if (this.x > TankMainFrame.GAME_WIDTH - ResourceMgr.newInstance().TX)
+            this.x = TankMainFrame.GAME_WIDTH - ResourceMgr.newInstance().TX;
         if (this.y < 50) this.y = 50;
-        if (this.y > TankMainFrame.GAME_HEIGHT - ResourceMgr.newInstance().TY) this.y = TankMainFrame.GAME_HEIGHT - ResourceMgr.newInstance().TY;
+        if (this.y > TankMainFrame.GAME_HEIGHT - ResourceMgr.newInstance().TY)
+            this.y = TankMainFrame.GAME_HEIGHT - ResourceMgr.newInstance().TY;
     }
 
     public void changeDir() {
