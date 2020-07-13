@@ -1,5 +1,8 @@
 package com.glepoch.tank;
 
+import enums.Dir;
+import enums.Group;
+
 import java.awt.*;
 
 public class Bullet {
@@ -43,8 +46,8 @@ public class Bullet {
         this.group = group;
         rect.x=this.x;
         rect.y=this.y;
-        rect.width=ResourceMgr.TX;
-        rect.height=ResourceMgr.TY;
+        rect.width=ResourceMgr.newInstance().TX;
+        rect.height=ResourceMgr.newInstance().TY;
     }
 
     public void paint(Graphics g) {
@@ -54,27 +57,27 @@ public class Bullet {
         switch (dir) {
             case LEFT:
                 if (Group.GOOD == this.group)
-                    g.drawImage(ResourceMgr.bulletL, x, y, null);
+                    g.drawImage(ResourceMgr.newInstance().bulletL, x, y, null);
                 else
-                    g.drawImage(ResourceMgr.badBulletL, x, y, null);
+                    g.drawImage(ResourceMgr.newInstance().badBulletL, x, y, null);
                 break;
             case UP:
                 if (Group.GOOD == this.group)
-                    g.drawImage(ResourceMgr.bulletU, x, y, null);
+                    g.drawImage(ResourceMgr.newInstance().bulletU, x, y, null);
                 else
-                    g.drawImage(ResourceMgr.badBulletU, x, y, null);
+                    g.drawImage(ResourceMgr.newInstance().badBulletU, x, y, null);
                 break;
             case RIGHT:
                 if (Group.GOOD == this.group)
-                    g.drawImage(ResourceMgr.bulletR, x, y, null);
+                    g.drawImage(ResourceMgr.newInstance().bulletR, x, y, null);
                 else
-                    g.drawImage(ResourceMgr.badBulletR, x, y, null);
+                    g.drawImage(ResourceMgr.newInstance().badBulletR, x, y, null);
                 break;
             case DOWN:
                 if (Group.GOOD == this.group)
-                    g.drawImage(ResourceMgr.bulletD, x, y, null);
+                    g.drawImage(ResourceMgr.newInstance().bulletD, x, y, null);
                 else
-                    g.drawImage(ResourceMgr.badBulletD, x, y, null);
+                    g.drawImage(ResourceMgr.newInstance().badBulletD, x, y, null);
                 break;
         }
         move();
@@ -106,8 +109,8 @@ public class Bullet {
         if (rect.intersects(tank.rect)) {
             this.die();
             tank.die();
-            int EX = tank.getX()+ResourceMgr.TX/2-ResourceMgr.EX/2;
-            int EY = tank.getY() +ResourceMgr.TY/2-ResourceMgr.EY/2;
+            int EX = tank.getX()+ResourceMgr.newInstance().TX/2-ResourceMgr.newInstance().EX/2;
+            int EY = tank.getY() +ResourceMgr.newInstance().TY/2-ResourceMgr.newInstance().EY/2;
             tmf.explodeList.add(new Explode(EX, EY, tmf));
         }
     }

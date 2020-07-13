@@ -1,8 +1,11 @@
 package com.glepoch.tank;
 
-import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import com.glepoch.tank.firebulletstrategy.impl.FireFoureBulletBulletStrategy;
+import com.glepoch.tank.firebulletstrategy.impl.FireOneBulletBulletStrategy;
+import com.glepoch.tank.tankimageStrategy.impl.BadTankStrategy;
+import enums.Dir;
+import enums.Group;
+
 import java.util.Random;
 
 /**
@@ -14,20 +17,24 @@ import java.util.Random;
 public class TankMain {
 
     public static void main(String[] args) {
-        Random random=new Random();
+        Random random = new Random();
         TankMainFrame tank = new TankMainFrame();
         Integer badTankCount = PropertiesMgr.getInt("badTankCount");
         for (int i = 0; i < badTankCount; i++) {
             int btx = random.nextInt(TankMainFrame.GAME_WIDTH);
             int bty = random.nextInt(TankMainFrame.GAME_HEIGHT);
             Dir dir = Dir.values()[random.nextInt(4)];
-            if(btx>=TankMainFrame.GAME_WIDTH-ResourceMgr.TX){
-                btx=TankMainFrame.GAME_WIDTH-ResourceMgr.TX;
+            if (btx >= TankMainFrame.GAME_WIDTH - ResourceMgr.newInstance().TX) {
+                btx = TankMainFrame.GAME_WIDTH - ResourceMgr.newInstance().TX;
             }
-            if(bty>=TankMainFrame.GAME_HEIGHT-ResourceMgr.TY){
-                bty=TankMainFrame.GAME_HEIGHT-ResourceMgr.TY;
+            if (bty >= TankMainFrame.GAME_HEIGHT - ResourceMgr.newInstance().TY) {
+                bty = TankMainFrame.GAME_HEIGHT - ResourceMgr.newInstance().TY;
             }
-            tank.badTankList.add(new Tank(btx, bty, dir, Group.BAD, tank));
+            if (i % 5 != 0) {
+                tank.badTankList.add(new Tank(btx, bty, dir, Group.BAD, tank, new FireOneBulletBulletStrategy(), new BadTankStrategy()));
+            } else {
+                tank.badTankList.add(new Tank(btx, bty, dir, Group.BAD, tank, new FireFoureBulletBulletStrategy(), new BadTankStrategy()));
+            }
         }
         //new Thread(()->new Audio("audio/war1.wav").loop()).start();
         while (true) {

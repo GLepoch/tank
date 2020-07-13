@@ -8,7 +8,7 @@ public class Explode {
     int x = 10, y = 10;
     private boolean alive = true;
     TankMainFrame tmf = null;
-    private List<BufferedImage> explodes = ResourceMgr.explodes;
+    private List<BufferedImage> explodes = ResourceMgr.newInstance().explodes;
 
     public int getX() {
         return x;

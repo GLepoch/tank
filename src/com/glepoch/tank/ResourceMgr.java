@@ -1,5 +1,7 @@
 package com.glepoch.tank;
 
+import utils.ImageUtil;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,14 +10,15 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 public class ResourceMgr {
-    public static BufferedImage tankL, tankU, tankR, tankD;
-    public static BufferedImage badTankL, badTankU, badTankR, badTankD;
-    public static BufferedImage bulletL, bulletU, bulletR, bulletD;
-    public static BufferedImage badBulletL, badBulletU, badBulletR, badBulletD;
-    public static int TX, TY, BX, BY, EX, EY;
-    public static List<BufferedImage> explodes = new ArrayList<>();
+    private static final ResourceMgr RESOURCE_MGR = new ResourceMgr();
+    public BufferedImage tankL, tankU, tankR, tankD;
+    public BufferedImage badTankL, badTankU, badTankR, badTankD;
+    public BufferedImage bulletL, bulletU, bulletR, bulletD;
+    public BufferedImage badBulletL, badBulletU, badBulletR, badBulletD;
+    public int TX, TY, BX, BY, EX, EY;
+    public List<BufferedImage> explodes = new ArrayList<>();
 
-    static {
+    private ResourceMgr() {
         try {
             //加载坦克图片资源(好)
             tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
@@ -50,5 +53,9 @@ public class ResourceMgr {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    };
+
+    public static ResourceMgr newInstance() {
+        return RESOURCE_MGR;
     }
 }

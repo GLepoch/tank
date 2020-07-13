@@ -1,4 +1,4 @@
-package com.glepoch.tank;
+package utils;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;

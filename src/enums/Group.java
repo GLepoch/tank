@@ -1,4 +1,4 @@
-package com.glepoch.tank;
+package enums;
 
 public enum Group {
     GOOD, BAD

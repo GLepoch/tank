@@ -1,7 +1,10 @@
 package com.glepoch.tank;
 
 
-import sun.awt.SunHints;
+import com.glepoch.tank.firebulletstrategy.impl.FireOneBulletBulletStrategy;
+import com.glepoch.tank.tankimageStrategy.impl.GoodTankStrategy;
+import enums.Dir;
+import enums.Group;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -18,10 +21,10 @@ import java.util.List;
  * @version: 1.0
  */
 public class TankMainFrame extends Frame {
-    Tank tank = new Tank(PropertiesMgr.getInt("goodTankX"), PropertiesMgr.getInt("goodTankY"), Dir.UP, Group.GOOD, this);
+    Tank tank = new Tank(PropertiesMgr.getInt("goodTankX"), PropertiesMgr.getInt("goodTankY"), Dir.UP, Group.GOOD, this,new FireOneBulletBulletStrategy(),new GoodTankStrategy());
     public static final int GAME_WIDTH = PropertiesMgr.getInt("gameWidth");
     public static final int GAME_HEIGHT =  PropertiesMgr.getInt("gameHeight");;
-    List<Bullet> bulletList = new ArrayList<>();
+    public List<Bullet> bulletList = new ArrayList<>();
     public List<Tank> badTankList = new ArrayList<>();
     public List<Explode> explodeList=new ArrayList<>();
 
@@ -76,9 +79,10 @@ public class TankMainFrame extends Frame {
                 bulletList.get(i).collideWith(badTankList.get(i1));
             }
         }
-        for (int i = 0; i < bulletList.size(); i++) {
+        /*我方坦克和子弹碰撞检测*/
+        /*for (int i = 0; i < bulletList.size(); i++) {
                 bulletList.get(i).collideWith(tank);
-        }
+        }*/
         for (int i = 0; i < explodeList.size(); i++) {
             explodeList.get(i).paint(g);
         }
