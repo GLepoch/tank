@@ -2,12 +2,11 @@ package com.glepoch.tank;
 
 import utils.ImageUtil;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 public class ResourceMgr {
     private static final ResourceMgr RESOURCE_MGR = new ResourceMgr();

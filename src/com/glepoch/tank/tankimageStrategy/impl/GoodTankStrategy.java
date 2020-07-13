@@ -1,14 +1,14 @@
 package com.glepoch.tank.tankimageStrategy.impl;
 
 import com.glepoch.tank.ResourceMgr;
-import com.glepoch.tank.tankgroupfactory.tank.impl.Tank;
+import com.glepoch.tank.tankgroupfactory.tank.TankAbstract;
 import com.glepoch.tank.tankimageStrategy.TankImageStrategy;
 
 import java.awt.*;
 
 public class GoodTankStrategy implements TankImageStrategy {
     @Override
-    public void paint(Graphics g, Tank tank) {
+    public void paint(Graphics g, TankAbstract tank) {
         if (!tank.alive) return;
         switch (tank.dir) {
             case LEFT:

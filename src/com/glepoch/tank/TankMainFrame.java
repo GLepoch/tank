@@ -1,10 +1,15 @@
 package com.glepoch.tank;
 
 
+import com.glepoch.tank.firebulletstrategy.impl.FireFoureBulletBulletStrategy;
 import com.glepoch.tank.firebulletstrategy.impl.FireOneBulletBulletStrategy;
-import com.glepoch.tank.tankgroupfactory.bullet.impl.Bullet;
-import com.glepoch.tank.tankgroupfactory.explode.impl.Explode;
-import com.glepoch.tank.tankgroupfactory.tank.impl.Tank;
+import com.glepoch.tank.tankgroupfactory.GroupFactory.TankGroupAbtractFactory;
+import com.glepoch.tank.tankgroupfactory.GroupFactory.impl.BadTankGroup;
+import com.glepoch.tank.tankgroupfactory.GroupFactory.impl.GoodTankGroup;
+import com.glepoch.tank.tankgroupfactory.bullet.BulletAbstarct;
+import com.glepoch.tank.tankgroupfactory.explode.ExplodeAbstract;
+import com.glepoch.tank.tankgroupfactory.tank.TankAbstract;
+import com.glepoch.tank.tankimageStrategy.impl.BadTankStrategy;
 import com.glepoch.tank.tankimageStrategy.impl.GoodTankStrategy;
 import enums.Dir;
 import enums.Group;
@@ -16,6 +21,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @description:
@@ -24,14 +30,18 @@ import java.util.List;
  * @version: 1.0
  */
 public class TankMainFrame extends Frame {
-    public Tank tank = new Tank(PropertiesMgr.getInt("goodTankX"), PropertiesMgr.getInt("goodTankY"), Dir.UP, Group.GOOD, this,new FireOneBulletBulletStrategy(),new GoodTankStrategy());
+    TankGroupAbtractFactory goodTankGroup = new GoodTankGroup();
+    TankGroupAbtractFactory badTankGroup = new BadTankGroup();
+    public TankAbstract tank = goodTankGroup.createTank(PropertiesMgr.getInt("goodTankX"), PropertiesMgr.getInt("goodTankY"), Dir.UP, Group.GOOD, this, new FireOneBulletBulletStrategy(), new GoodTankStrategy(), goodTankGroup);
     public static final int GAME_WIDTH = PropertiesMgr.getInt("gameWidth");
-    public static final int GAME_HEIGHT =  PropertiesMgr.getInt("gameHeight");;
-    public List<Bullet> bulletList = new ArrayList<>();
-    public List<Tank> badTankList = new ArrayList<>();
-    public List<Explode> explodeList=new ArrayList<>();
+    public static final int GAME_HEIGHT = PropertiesMgr.getInt("gameHeight");
+    ;
+    public List<BulletAbstarct> bulletList = new ArrayList<>();
+    public List<TankAbstract> badTankList = new ArrayList<>();
+    public List<ExplodeAbstract> explodeList = new ArrayList<>();
 
     public TankMainFrame() {
+        createBadTank();
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(true);
         setTitle("Tank");
@@ -71,8 +81,8 @@ public class TankMainFrame extends Frame {
         for (int i = 0; i < badTankList.size(); i++) {
             badTankList.get(i).paint(g);
         }
-        if(tank!=null)
-        tank.paint(g);
+        if (tank != null)
+            tank.paint(g);
         for (int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).paint(g);
         }
@@ -122,7 +132,7 @@ public class TankMainFrame extends Frame {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            if(tank==null) return;
+            if (tank == null) return;
             int keyCode = e.getKeyCode();
             switch (keyCode) {
                 case KeyEvent.VK_LEFT:
@@ -146,16 +156,37 @@ public class TankMainFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            if(tank==null) return;
+            if (tank == null) return;
             if (!bl && !br && !bu && !bd) {
-                tank.moving=false;
+                tank.moving = false;
             } else {
-                tank.moving=true;
-                if (bl) tank.dir=Dir.LEFT;
-                if (br) tank.dir=Dir.RIGHT;
-                if (bu) tank.dir=Dir.UP;
-                if (bd) tank.dir=Dir.DOWN;
+                tank.moving = true;
+                if (bl) tank.dir = Dir.LEFT;
+                if (br) tank.dir = Dir.RIGHT;
+                if (bu) tank.dir = Dir.UP;
+                if (bd) tank.dir = Dir.DOWN;
 
+            }
+        }
+    }
+
+    void createBadTank() {
+        Random random = new Random();
+        Integer badTankCount = PropertiesMgr.getInt("badTankCount");
+        for (int i = 0; i < badTankCount; i++) {
+            int btx = random.nextInt(TankMainFrame.GAME_WIDTH);
+            int bty = random.nextInt(TankMainFrame.GAME_HEIGHT);
+            Dir dir = Dir.values()[random.nextInt(4)];
+            if (btx >= TankMainFrame.GAME_WIDTH - ResourceMgr.newInstance().TX) {
+                btx = TankMainFrame.GAME_WIDTH - ResourceMgr.newInstance().TX;
+            }
+            if (bty >= TankMainFrame.GAME_HEIGHT - ResourceMgr.newInstance().TY) {
+                bty = TankMainFrame.GAME_HEIGHT - ResourceMgr.newInstance().TY;
+            }
+            if (i % 5 != 0) {
+                this.badTankList.add(badTankGroup.createTank(btx, bty, dir, Group.BAD, this, new FireOneBulletBulletStrategy(), new BadTankStrategy(), badTankGroup));
+            } else {
+                this.badTankList.add(badTankGroup.createTank(btx, bty, dir, Group.BAD, this, new FireFoureBulletBulletStrategy(), new BadTankStrategy(), badTankGroup));
             }
         }
     }

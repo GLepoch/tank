@@ -1,10 +1,10 @@
 package com.glepoch.tank.tankgroupfactory.bullet;
 
-import com.glepoch.tank.tankgroupfactory.explode.impl.Explode;
 import com.glepoch.tank.PropertiesMgr;
 import com.glepoch.tank.ResourceMgr;
 import com.glepoch.tank.TankMainFrame;
-import com.glepoch.tank.tankgroupfactory.tank.impl.Tank;
+import com.glepoch.tank.tankgroupfactory.GroupFactory.TankGroupAbtractFactory;
+import com.glepoch.tank.tankgroupfactory.tank.TankAbstract;
 import enums.Dir;
 import enums.Group;
 
@@ -18,8 +18,9 @@ public abstract class BulletAbstarct {
     public TankMainFrame tmf = null;
     public Group group = Group.BAD;
     public Rectangle rect=new Rectangle();
+    public TankGroupAbtractFactory tankGroupAbtractFactory;
 
-    public BulletAbstarct(int x, int y, Dir dir, Group group, TankMainFrame tmf) {
+    public BulletAbstarct(int x, int y, Dir dir, Group group, TankMainFrame tmf, TankGroupAbtractFactory tankGroupAbtractFactory) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -29,6 +30,7 @@ public abstract class BulletAbstarct {
         rect.y=this.y;
         rect.width=ResourceMgr.newInstance().TX;
         rect.height=ResourceMgr.newInstance().TY;
+        this.tankGroupAbtractFactory=tankGroupAbtractFactory;
     }
 
     public void paint(Graphics g) {
@@ -84,7 +86,7 @@ public abstract class BulletAbstarct {
         if (this.x < 0 || this.y < 0 || x > tmf.getWidth() || y > tmf.getHeight()) alive = false;
     }
 
-    public void collideWith(Tank tank) {
+    public void collideWith(TankAbstract tank) {
         if(tank==null) return;
         if (this.group == tank.group) return;
         if (rect.intersects(tank.rect)) {
@@ -92,7 +94,7 @@ public abstract class BulletAbstarct {
             tank.die();
             int EX = tank.x+ResourceMgr.newInstance().TX/2-ResourceMgr.newInstance().EX/2;
             int EY = tank.y +ResourceMgr.newInstance().TY/2-ResourceMgr.newInstance().EY/2;
-            tmf.explodeList.add(new Explode(EX, EY, tmf));
+            tmf.explodeList.add(tankGroupAbtractFactory.createExplode(EX, EY, tmf));
         }
     }
 

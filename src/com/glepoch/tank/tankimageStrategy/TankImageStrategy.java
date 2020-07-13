@@ -1,9 +1,9 @@
 package com.glepoch.tank.tankimageStrategy;
 
-import com.glepoch.tank.tankgroupfactory.tank.impl.Tank;
+import com.glepoch.tank.tankgroupfactory.tank.TankAbstract;
 
 import java.awt.*;
 
 public interface TankImageStrategy {
-    void paint(Graphics g, Tank tank);
+    void paint(Graphics g, TankAbstract tank);
 }

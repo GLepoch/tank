@@ -5,6 +5,7 @@ import com.glepoch.tank.ResourceMgr;
 import com.glepoch.tank.TankMainFrame;
 import com.glepoch.tank.firebulletstrategy.FireBulletStrategy;
 import com.glepoch.tank.firebulletstrategy.impl.FireOneBulletBulletStrategy;
+import com.glepoch.tank.tankgroupfactory.GroupFactory.TankGroupAbtractFactory;
 import com.glepoch.tank.tankimageStrategy.TankImageStrategy;
 import com.glepoch.tank.tankimageStrategy.impl.GoodTankStrategy;
 import enums.Dir;
@@ -25,8 +26,9 @@ public abstract class TankAbstract {
     public FireBulletStrategy fireBulletStrategy = new FireOneBulletBulletStrategy();
     public TankImageStrategy tankImageStrategy = new GoodTankStrategy();
     public Random random = new Random();
+    public TankGroupAbtractFactory tankGroupAbtractFactory;
 
-    public TankAbstract(int x, int y, Dir dir, Group group, TankMainFrame tmf, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy) {
+    public TankAbstract(int x, int y, Dir dir, Group group, TankMainFrame tmf, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy,TankGroupAbtractFactory tankGroupAbtractFactory) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -38,6 +40,7 @@ public abstract class TankAbstract {
         rect.height = ResourceMgr.newInstance().TY;
         this.fireBulletStrategy = fireBulletStrategy;
         this.tankImageStrategy = tankImageStrategy;
+        this.tankGroupAbtractFactory=tankGroupAbtractFactory;
     }
 
     public abstract void paint(Graphics g);
