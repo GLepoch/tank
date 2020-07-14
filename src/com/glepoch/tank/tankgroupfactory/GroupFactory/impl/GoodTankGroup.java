@@ -1,6 +1,5 @@
 package com.glepoch.tank.tankgroupfactory.GroupFactory.impl;
 
-import com.glepoch.tank.TankMainFrame;
 import com.glepoch.tank.firebulletstrategy.FireBulletStrategy;
 import com.glepoch.tank.tankgroupfactory.GroupFactory.TankGroupAbtractFactory;
 import com.glepoch.tank.tankgroupfactory.bullet.BulletAbstarct;
@@ -12,20 +11,21 @@ import com.glepoch.tank.tankgroupfactory.tank.impl.Tank;
 import com.glepoch.tank.tankimageStrategy.TankImageStrategy;
 import enums.Dir;
 import enums.Group;
+import gamemodelfacade.GameModel;
 
 public class GoodTankGroup extends TankGroupAbtractFactory {
     @Override
-    public TankAbstract createTank(int x, int y, Dir dir, Group group, TankMainFrame tmf, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy, TankGroupAbtractFactory tankGroupAbtractFactory) {
-        return new Tank(x, y, dir, group, tmf, fireBulletStrategy, tankImageStrategy, tankGroupAbtractFactory);
+    public TankAbstract createTank(int x, int y, Dir dir, Group group, GameModel gm, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy) {
+        return new Tank(x, y, dir, group, gm, fireBulletStrategy, tankImageStrategy);
     }
 
     @Override
-    public BulletAbstarct createBullet(int x, int y, Dir dir, Group group, TankMainFrame tmf, TankGroupAbtractFactory tankGroupAbtractFactory) {
-        return new Bullet(x, y, dir, group, tmf, tankGroupAbtractFactory);
+    public BulletAbstarct createBullet(int x, int y, Dir dir, Group group, GameModel gm) {
+        return new Bullet(x, y, dir, group, gm);
     }
 
     @Override
-    public ExplodeAbstract createExplode(int x, int y, TankMainFrame tmf) {
-        return new Explode(x, y, tmf);
+    public ExplodeAbstract createExplode(int x, int y, GameModel gm) {
+        return new Explode(x, y, gm);
     }
 }

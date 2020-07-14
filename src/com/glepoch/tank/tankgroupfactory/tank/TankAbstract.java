@@ -4,12 +4,13 @@ import com.glepoch.tank.PropertiesMgr;
 import com.glepoch.tank.ResourceMgr;
 import com.glepoch.tank.TankMainFrame;
 import com.glepoch.tank.firebulletstrategy.FireBulletStrategy;
-import com.glepoch.tank.firebulletstrategy.impl.FireOneBulletBulletStrategy;
+import com.glepoch.tank.firebulletstrategy.impl.FireOneBulletStrategy;
 import com.glepoch.tank.tankgroupfactory.GroupFactory.TankGroupAbtractFactory;
 import com.glepoch.tank.tankimageStrategy.TankImageStrategy;
 import com.glepoch.tank.tankimageStrategy.impl.GoodTankStrategy;
 import enums.Dir;
 import enums.Group;
+import gamemodelfacade.GameModel;
 
 import java.awt.*;
 import java.util.Random;
@@ -18,21 +19,21 @@ public abstract class TankAbstract {
     public static final int SPEED = PropertiesMgr.getInt("tankSpeed");
     public Rectangle rect = new Rectangle();
     public boolean moving = true;
-    public TankMainFrame tmf = null;
+    public GameModel gm = null;
     public int x = 50, y = 50;
     public Dir dir = Dir.DOWN;
     public boolean alive = true;
     public Group group = Group.BAD;
-    public FireBulletStrategy fireBulletStrategy = new FireOneBulletBulletStrategy();
+    public FireBulletStrategy fireBulletStrategy = new FireOneBulletStrategy();
     public TankImageStrategy tankImageStrategy = new GoodTankStrategy();
     public Random random = new Random();
     public TankGroupAbtractFactory tankGroupAbtractFactory;
 
-    public TankAbstract(int x, int y, Dir dir, Group group, TankMainFrame tmf, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy, TankGroupAbtractFactory tankGroupAbtractFactory) {
+    public TankAbstract(int x, int y, Dir dir, Group group, GameModel gm, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tmf = tmf;
+        this.gm = gm;
         this.group = group;
         rect.x = this.x;
         rect.y = this.y;
@@ -91,7 +92,7 @@ public abstract class TankAbstract {
     public void die() {
         alive = false;
         System.out.println(this.alive + "   " + this.group);
-        tmf.badTankList.remove(this);
+        gm.badTankList.remove(this);
         //tmf.tank = null;
     }
 }

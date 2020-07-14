@@ -1,7 +1,6 @@
 package com.glepoch.tank.tankimageStrategy.impl;
 
 import com.glepoch.tank.ResourceMgr;
-
 import com.glepoch.tank.tankgroupfactory.tank.TankAbstract;
 import com.glepoch.tank.tankimageStrategy.TankImageStrategy;
 

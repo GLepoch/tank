@@ -1,14 +1,14 @@
 package com.glepoch.tank.firebulletstrategy.impl;
 
-import com.glepoch.tank.tankgroupfactory.GroupFactory.TankGroupAbtractFactory;
+import com.glepoch.tank.ResourceMgr;
 import com.glepoch.tank.firebulletstrategy.FireBulletStrategy;
 import com.glepoch.tank.tankgroupfactory.tank.TankAbstract;
+import enums.Dir;
 import enums.Group;
-import com.glepoch.tank.ResourceMgr;
 
-public class FireOneBulletBulletStrategy implements FireBulletStrategy {
+public class FireFoureBulletStrategy implements FireBulletStrategy {
     @Override
-    public void fire(TankAbstract tank, TankGroupAbtractFactory tankGroupAbtractFactory) {
+    public void fire(TankAbstract tank) {
         int BX = tank.x + ResourceMgr.newInstance().TX / 2 - ResourceMgr.newInstance().BX / 2;
         int BY = tank.y + ResourceMgr.newInstance().TY / 2 - ResourceMgr.newInstance().BY / 2;
         switch (tank.dir) {
@@ -49,6 +49,9 @@ public class FireOneBulletBulletStrategy implements FireBulletStrategy {
                 }
                 break;
         }
-        tank.tmf.bulletList.add(tankGroupAbtractFactory.createBullet(BX, BY, tank.dir, tank.group, tank.tmf, tankGroupAbtractFactory));
+        tank.gm.bulletList.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.LEFT, tank.group, tank.gm));
+        tank.gm.bulletList.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.RIGHT, tank.group, tank.gm));
+        tank.gm.bulletList.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.UP, tank.group, tank.gm));
+        tank.gm.bulletList.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.DOWN, tank.group, tank.gm));
     }
 }

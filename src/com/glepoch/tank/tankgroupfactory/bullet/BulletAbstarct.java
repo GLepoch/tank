@@ -3,10 +3,10 @@ package com.glepoch.tank.tankgroupfactory.bullet;
 import com.glepoch.tank.PropertiesMgr;
 import com.glepoch.tank.ResourceMgr;
 import com.glepoch.tank.TankMainFrame;
-import com.glepoch.tank.tankgroupfactory.GroupFactory.TankGroupAbtractFactory;
 import com.glepoch.tank.tankgroupfactory.tank.TankAbstract;
 import enums.Dir;
 import enums.Group;
+import gamemodelfacade.GameModel;
 
 import java.awt.*;
 
@@ -16,27 +16,25 @@ public abstract class BulletAbstarct {
     public int x = 10, y = 10;
     public Dir dir = Dir.DOWN;
     public boolean alive = true;
-    public TankMainFrame tmf = null;
+    public GameModel gm = null;
     public Group group = Group.BAD;
     public Rectangle rect = new Rectangle();
-    public TankGroupAbtractFactory tankGroupAbtractFactory;
 
-    public BulletAbstarct(int x, int y, Dir dir, Group group, TankMainFrame tmf, TankGroupAbtractFactory tankGroupAbtractFactory) {
+    public BulletAbstarct(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tmf = tmf;
+        this.gm = gm;
         this.group = group;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = ResourceMgr.newInstance().TX;
         rect.height = ResourceMgr.newInstance().TY;
-        this.tankGroupAbtractFactory = tankGroupAbtractFactory;
     }
 
     public void paint(Graphics g) {
         if (!alive) {
-            this.tmf.bulletList.remove(this);
+            this.gm.bulletList.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -84,7 +82,7 @@ public abstract class BulletAbstarct {
         }
         rect.x = this.x;
         rect.y = this.y;
-        if (this.x < 0 || this.y < 0 || x > tmf.getWidth() || y > tmf.getHeight()) alive = false;
+        if (this.x < 0 || this.y < 0 || x > TankMainFrame.GAME_WIDTH || y > TankMainFrame.GAME_HEIGHT) alive = false;
     }
 
     public void collideWith(TankAbstract tank) {
@@ -95,7 +93,7 @@ public abstract class BulletAbstarct {
             tank.die();
             int EX = tank.x + ResourceMgr.newInstance().TX / 2 - ResourceMgr.newInstance().EX / 2;
             int EY = tank.y + ResourceMgr.newInstance().TY / 2 - ResourceMgr.newInstance().EY / 2;
-            tmf.explodeList.add(tankGroupAbtractFactory.createExplode(EX, EY, tmf));
+            gm.explodeList.add(gm.tankGroup.createExplode(EX, EY, gm));
         }
     }
 
