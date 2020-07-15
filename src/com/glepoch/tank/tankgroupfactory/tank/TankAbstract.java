@@ -5,6 +5,7 @@ import com.glepoch.tank.ResourceMgr;
 import com.glepoch.tank.TankMainFrame;
 import com.glepoch.tank.firebulletstrategy.FireBulletStrategy;
 import com.glepoch.tank.firebulletstrategy.impl.FireOneBulletStrategy;
+import com.glepoch.tank.tankgroupfactory.GameObject;
 import com.glepoch.tank.tankgroupfactory.GroupFactory.TankGroupAbtractFactory;
 import com.glepoch.tank.tankimageStrategy.TankImageStrategy;
 import com.glepoch.tank.tankimageStrategy.impl.GoodTankStrategy;
@@ -15,12 +16,11 @@ import gamemodelfacade.GameModel;
 import java.awt.*;
 import java.util.Random;
 
-public abstract class TankAbstract {
+public abstract class TankAbstract extends GameObject {
     public static final int SPEED = PropertiesMgr.getInt("tankSpeed");
     public Rectangle rect = new Rectangle();
     public boolean moving = true;
     public GameModel gm = null;
-    public int x = 50, y = 50;
     public Dir dir = Dir.DOWN;
     public boolean alive = true;
     public Group group = Group.BAD;
@@ -28,6 +28,7 @@ public abstract class TankAbstract {
     public TankImageStrategy tankImageStrategy = new GoodTankStrategy();
     public Random random = new Random();
     public TankGroupAbtractFactory tankGroupAbtractFactory;
+    public int oldX,oldY;
 
     public TankAbstract(int x, int y, Dir dir, Group group, GameModel gm, FireBulletStrategy fireBulletStrategy, TankImageStrategy tankImageStrategy) {
         this.x = x;
@@ -47,6 +48,8 @@ public abstract class TankAbstract {
     public abstract void paint(Graphics g);
 
     public void move() {
+        oldX=x;
+        oldY=y;
         if (!moving)
             return;
         switch (dir) {
@@ -92,7 +95,11 @@ public abstract class TankAbstract {
     public void die() {
         alive = false;
         System.out.println(this.alive + "   " + this.group);
-        gm.badTankList.remove(this);
+        gm.gameObjects.remove(this);
         //tmf.tank = null;
     }
+
+    public abstract void stop();
+
+    public abstract void back();
 }

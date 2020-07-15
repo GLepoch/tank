@@ -49,9 +49,9 @@ public class FireFoureBulletStrategy implements FireBulletStrategy {
                 }
                 break;
         }
-        tank.gm.bulletList.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.LEFT, tank.group, tank.gm));
-        tank.gm.bulletList.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.RIGHT, tank.group, tank.gm));
-        tank.gm.bulletList.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.UP, tank.group, tank.gm));
-        tank.gm.bulletList.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.DOWN, tank.group, tank.gm));
+        tank.gm.gameObjects.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.LEFT, tank.group, tank.gm));
+        tank.gm.gameObjects.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.RIGHT, tank.group, tank.gm));
+        tank.gm.gameObjects.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.UP, tank.group, tank.gm));
+        tank.gm.gameObjects.add(tank.gm.tankGroup.createBullet(BX, BY, Dir.DOWN, tank.group, tank.gm));
     }
 }

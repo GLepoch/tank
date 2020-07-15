@@ -3,6 +3,7 @@ package com.glepoch.tank.tankgroupfactory.bullet;
 import com.glepoch.tank.PropertiesMgr;
 import com.glepoch.tank.ResourceMgr;
 import com.glepoch.tank.TankMainFrame;
+import com.glepoch.tank.tankgroupfactory.GameObject;
 import com.glepoch.tank.tankgroupfactory.tank.TankAbstract;
 import enums.Dir;
 import enums.Group;
@@ -10,10 +11,8 @@ import gamemodelfacade.GameModel;
 
 import java.awt.*;
 
-public abstract class BulletAbstarct {
+public abstract class BulletAbstarct extends GameObject {
     public static final int SPEED = PropertiesMgr.getInt("bulletSpeed");
-    ;
-    public int x = 10, y = 10;
     public Dir dir = Dir.DOWN;
     public boolean alive = true;
     public GameModel gm = null;
@@ -34,7 +33,7 @@ public abstract class BulletAbstarct {
 
     public void paint(Graphics g) {
         if (!alive) {
-            this.gm.bulletList.remove(this);
+            this.gm.gameObjects.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -93,7 +92,7 @@ public abstract class BulletAbstarct {
             tank.die();
             int EX = tank.x + ResourceMgr.newInstance().TX / 2 - ResourceMgr.newInstance().EX / 2;
             int EY = tank.y + ResourceMgr.newInstance().TY / 2 - ResourceMgr.newInstance().EY / 2;
-            gm.explodeList.add(gm.tankGroup.createExplode(EX, EY, gm));
+            gm.gameObjects.add(gm.tankGroup.createExplode(EX, EY, gm));
         }
     }
 

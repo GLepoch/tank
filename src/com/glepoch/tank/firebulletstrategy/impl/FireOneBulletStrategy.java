@@ -48,6 +48,6 @@ public class FireOneBulletStrategy implements FireBulletStrategy {
                 }
                 break;
         }
-        tank.gm.bulletList.add(tank.gm.tankGroup.createBullet(BX, BY, tank.dir, tank.group, tank.gm));
+        tank.gm.gameObjects.add(tank.gm.tankGroup.createBullet(BX, BY, tank.dir, tank.group, tank.gm));
     }
 }
